@@ -86,11 +86,9 @@ function callAjax(url, status) {
         return false;
     }
 
-
-    xhr.open('get', url, true);
-    xhr.send(null);
-
     xhr.onload = function() {
+        console.log(xhr.readyState);
+        console.log(xhr.status);
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 var content = JSON.parse(xhr.responseText);
@@ -113,6 +111,13 @@ function callAjax(url, status) {
             }
         }
     };
+
+
+
+    xhr.open('get', url, true);
+    xhr.send(null);
+
+
 }
 
 // load已確認 data 有資料
