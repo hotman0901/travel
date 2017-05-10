@@ -82,35 +82,41 @@ function callAjax(url, status) {
     }
 
 
-    xhr.open('get', url, true);
-    xhr.send(null);
 
-    xhr.onload = function() {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                var content = JSON.parse(xhr.responseText);
-                // 資料是放在 result.records
-                data = content.result.records;
+    // 以防失敗改抓取寫死的資料
+    try {
+        xhr.open('get', url, true);
+        xhr.send(null);
 
-                // 若載入的時候已經有產生選單之後就不再做
-                if (selectItem.length < 1) {
-                    renderOption(data);
+        xhr.onload = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var content = JSON.parse(xhr.responseText);
+                    // 資料是放在 result.records
+                    data = content.result.records;
+
+                    // 若載入的時候已經有產生選單之後就不再做
+                    if (selectItem.length < 1) {
+                        renderOption(data);
+                    }
+                    // 渲染內容
+                    // 當不是第一次載入時不做renderContent = 沒有查詢
+                    if (status != 0) {
+                        // 有觸發到下拉選單或熱門區都是第一頁開始
+                        renderContent(1);
+                    }
+
+                } else {
+                    alert('There was a problem with the request.');
                 }
-                // 渲染內容
-                // 當不是第一次載入時不做renderContent = 沒有查詢
-                if (status != 0) {
-                    // 有觸發到下拉選單或熱門區都是第一頁開始
-                    renderContent(1);
-                }
-
             } else {
-                alert('There was a problem with the request.');
+                console.log(xhr.readyState);
+                console.log(xhr.status);
             }
-        } else {
-            console.log(xhr.readyState);
-            console.log(xhr.status);
-        }
-    };
+        };
+    } catch (e) {
+        console.log("log::::" + e);
+    }
 }
 
 // load已確認 data 有資料
