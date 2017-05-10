@@ -106,6 +106,9 @@ function callAjax(url, status) {
             } else {
                 alert('There was a problem with the request.');
             }
+        } else {
+            console.log(xhr.readyState);
+            console.log(xhr.status);
         }
     };
 }
