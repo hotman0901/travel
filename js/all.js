@@ -58,7 +58,7 @@ Math.easeInOutQuad = function(t, b, c, d) {
 try {
     callAjax(url, 0);
 } catch (e) {
-    console.log("log::::" + e);
+    alert("log::::" + e);
 }
 // 此次是要撈取全部的地區用
 
