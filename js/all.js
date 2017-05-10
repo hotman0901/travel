@@ -1,11 +1,13 @@
 var url = 'https://hotman0901.github.io/travel/json/datastore_search.json';
-var data = '';
+var data = [];
 var selectItem = [];
 var selectAreaObj = document.querySelector('#select-area');
 var hotList = document.querySelector("#hot-area-list");
 var contentTitle = document.querySelector('.content-title');
 var repage = document.querySelector('#render-page');
 var reContent = document.querySelector('#render-content');
+var optionData;
+
 
 // 當有滾動的時候
 window.onscroll = function() {
@@ -55,13 +57,8 @@ Math.easeInOutQuad = function(t, b, c, d) {
 
 
 
-try {
-    callAjax(url, 0);
-} catch (e) {
-    alert("log::::" + e);
-}
 // 此次是要撈取全部的地區用
-
+callAjax(url, 0);
 // status 0=初始畫面觸發，1=從下拉選單觸發，2=從熱門區觸發
 function callAjax(url, status) {
     var xhr;
@@ -86,18 +83,20 @@ function callAjax(url, status) {
         return false;
     }
 
+
+    xhr.open('get', url, true);
+    xhr.send(null);
+
     xhr.onload = function() {
-        console.log(xhr.readyState);
-        console.log(xhr.status);
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 var content = JSON.parse(xhr.responseText);
                 // 資料是放在 result.records
-                data = content.result.records;
+                optionData = content.result.records;
 
                 // 若載入的時候已經有產生選單之後就不再做
                 if (selectItem.length < 1) {
-                    renderOption(data);
+                    renderOption(optionData);
                 }
                 // 渲染內容
                 // 當不是第一次載入時不做renderContent = 沒有查詢
@@ -111,23 +110,16 @@ function callAjax(url, status) {
             }
         }
     };
-
-
-
-    xhr.open('get', url, true);
-    xhr.send(null);
-
-
 }
 
 // load已確認 data 有資料
 // 渲染下拉選單
 // 判斷有哪些地區，並且重複的地區塞到selectItem內
-function renderOption() {
-    for (var i = 0; i < data.length; i++) {
+function renderOption(option) {
+    for (var i = 0; i < option.length; i++) {
         // console.log(data[i].Zone);
-        if (selectItem.indexOf(data[i].Zone) == -1) {
-            selectItem.push(data[i].Zone);
+        if (selectItem.indexOf(option[i].Zone) == -1) {
+            selectItem.push(option[i].Zone);
         }
     }
 
@@ -154,6 +146,7 @@ function renderContent(goPage) {
     if (totalItem == 0) {
         contentTitle.textContent = '查無資料';
         reContent.innerHTML = '';
+        repage.style.display = 'none';
         return false;
     }
     // 有資料的時候只要取第一筆的name即可
@@ -245,7 +238,10 @@ selectAreaObj.addEventListener('change', function(e) {
     if (objValue != "") {
         // 重串url條件
         var newurl = url + '&q=' + objValue;
-        callAjax(newurl, 1);
+        // callAjax(newurl, 1);
+        queryArea(objValue);
+        // callAjax(newurl, 2);
+        renderContent(1);
     }
 });
 
@@ -256,9 +252,27 @@ hotList.addEventListener('click', function(e) {
     if (e.target.nodeName == 'A') {
         // 重串url條件
         var newurl = url + '&q=' + e.target.textContent;
-        callAjax(newurl, 2);
+        queryArea(e.target.textContent);
+        // callAjax(newurl, 2);
+        renderContent(1);
     }
 });
+
+
+// 重新將查詢的資料放入到新的物件
+function queryArea(areaName) {
+    // 清空
+    data = [];
+    // queryData
+    for (var i = 0; i < optionData.length; i++) {
+        // console.log(data[i].Zone);
+        if (optionData[i].Zone == areaName) {
+            data.push(optionData[i]);
+        }
+    }
+}
+
+
 
 // 頁次偵聽
 repage.addEventListener('click', function(e) {
