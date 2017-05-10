@@ -1,0 +1,315 @@
+// 共用方法
+@import 'common/mixin';
+// 斷點
+@import 'common/grid';
+@import 'common/reset';
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    font-family: PingFangTC-Regular;
+    ;
+}
+
+a {
+    text-decoration: none;
+}
+
+// map用法
+$size: ( fs40: 40px, fs36: 36px, fs20: 20px, fs18: 18px, fs16: 16px, fs14: 14px);
+// 取出font-size的function
+@function ft-size($size-name) {
+    @return map-get($size, $size-name);
+}
+
+.header {
+    .jumbotron {
+        background-image: url('../img/Hero.png');
+        background-size: cover;
+        background-position: center bottom;
+        min-height: 380px;
+        // bootstrap有原本的屬性在先移除
+        padding: 0;
+        margin: 0;
+        .travrel-title {
+            color: white;
+            font-size: ft-size(fs40);
+            letter-spacing: 3.89px;
+            margin-top: 89px;
+            margin-bottom: 96px;
+        }
+        .form-control {
+            // 拿掉下拉選單的圖示
+            appearance: none;
+            border: 3px solid #FFFFFF;
+            color: black;
+            border-radius: 3px;
+            background: url("../img/icons_down.png") rgba(255, 255, 255, 0.70) no-repeat;
+            background-position: 98% 50%;
+            display: block;
+            height: 48px;
+            font-size: ft-size(fs18);
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.hot-area h2 {
+    font-size: ft-size(fs18);
+    color: black;
+}
+
+.hot-area {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
+    border-radius: 5px;
+    min-height: 112px;
+    position: relative;
+    top: -30px;
+    h2 {
+        margin-top: 20px;
+        margin-left: 11px;
+    }
+    ul {
+        margin-top: 14px;
+        margin-left: 15px;
+        li {
+            display: inline-block;
+            margin-bottom: 14px;
+            margin-left: 23px;
+            @include range-width(0,
+            427px) {
+                margin-left: 0;
+            }
+            a {
+                min-width: 130px;
+                display: inline-block;
+                height: 42px;
+                font-size: ft-size(fs20);
+                padding-top: 10px;
+                font-weight: 200;
+                @include range-width(0,
+                427px) {
+                    min-width: 100%;
+                    width: 100%;
+                }
+            }
+            a:before {
+                @include vertical-align;
+            }
+        }
+        // visited順序要寫在hover前面不然會失效
+        .label-area-1 {
+            background-color: #8A82CC;
+            &:visited {
+                background-color: #8A82CC;
+            }
+            &:hover {
+                background-color: lighten(#8A82CC, 5%);
+            }
+            &:active {
+                background-color: darken(#8A82CC, 3%);
+            }
+        }
+        .label-area-2 {
+            background-color: #FFA782;
+            &:visited {
+                background-color: #FFA782;
+            }
+            &:hover {
+                background-color: lighten(#FFA782, 5%);
+            }
+            &:active {
+                background-color: darken(#FFA782, 3%);
+            }
+        }
+        .label-area-3 {
+            background-color: #F5D105;
+            &:visited {
+                background-color: #F5D105;
+            }
+            &:hover {
+                background-color: lighten(#F5D105, 5%);
+            }
+            &:active {
+                background-color: darken(#F5D105, 3%);
+            }
+        }
+        .label-area-4 {
+            background-color: #559AC8;
+            &:visited {
+                background-color: #559AC8;
+            }
+            &:hover {
+                background-color: lighten(#559AC8, 5%);
+            }
+            &:active {
+                background-color: darken(#559AC8, 3%);
+            }
+        }
+    }
+}
+
+.hr-dashed {
+    height: 1px;
+    border: none;
+    border-top: 1px dashed #559AC8;
+    width: calc(50% - 14px - 4px);
+    // hr 初始是block
+    display: inline-block;
+}
+
+.icon-down2 {
+    background: url('../img/icons_down2.png') no-repeat;
+    background-position: 50% 60%;
+    background-size: 60%;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #559AC8;
+    display: inline-block;
+    margin-top: -50px;
+    // 因為位置有點偏下方，所以用relative偏移回來
+    position: relative;
+    top: -10px;
+}
+
+.content {
+    margin-bottom: 49px;
+    .content-title {
+        text-align: center;
+        font-size: ft-size(fs36);
+        color: #8A82CC;
+        // 是要偏移65px因為上面的row有高度44所以只要21就夠
+        margin-top: calc(65px - 44px);
+        margin-bottom: 24px;
+    }
+    .thumbnail {
+        text-decoration: none;
+        position: relative;
+        .clip {
+            // img 之後要用js寫進去
+            // background-image: url('http://khh.travel/FileArtPic.ashx?id=705&w=1280&h=960');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 60%;
+            height: 150px;
+        }
+    }
+}
+
+.content-img-title {
+    color: white;
+    position: relative;
+    top: 110px;
+    h3 {
+        display: inline-block;
+        // width: 75%;
+        // background-color: red;
+        float: left;
+    }
+    span {
+        text-align: right;
+        display: inline-block;
+        // position: relative;
+        // left: 60%;
+        // width: 23%;
+        text-align: right;
+        // background-color: blue;
+        float: right;
+    }
+}
+
+.content-info {
+    span {
+        display: block;
+        font-size: ft-size(fs16);
+        margin-top: 10px;
+        @include overflow-docx3
+    }
+    // 圖片使用before，用偽元素插入
+    .content-info-1 {
+        &:before {
+            content: url('../img/icons_clock.png');
+            margin-right: 10px;
+            position: relative;
+            top: 3px;
+        }
+    }
+    .content-info-2 {
+        &:before {
+            content: url('../img/icons_pin.png');
+            margin-right: 11px;
+            position: relative;
+            top: 3px;
+        }
+    }
+    .content-info-3 {
+        display: inline-block;
+        &:before {
+            content: url('../img/icons_phone.png');
+            margin-right: 13px;
+            margin-left: 2px;
+            position: relative;
+            top: 3px;
+        }
+    }
+    .content-info-4 {
+        display: inline-block;
+        float: right;
+        @include range-width(0,
+        998px) {
+            display: block;
+            float: none;
+        }
+        &:before {
+            content: url('../img/icons_tag.png');
+            margin-right: 13px;
+            position: relative;
+            top: 3px;
+        }
+    }
+}
+
+.data-page {
+    margin-top: calc(49px - 15px);
+    a{
+        font-size: ft-size(fs14);
+        color: #4A4A4A;
+        &:hover{
+            color: rgba(73,73,73,0.50);;
+        }
+    }
+}
+
+.gototp {
+    position: fixed;
+    right: 2%;
+    bottom: 100px;
+}
+
+.fotter {
+    position: relative;
+    .container-fluid {
+        min-height: 90px;
+        // bootstrap有原本的屬性在先移除
+        padding: 0;
+        margin: 0;
+        background-color: #559AC8;
+        @include center-block;
+        h3 {
+            margin-top: 24px;
+            font-size: ft-size(fs14);
+            color: white;
+        }
+        a {
+            font-size: ft-size(fs14);
+            color: #FFD366;
+            margin-top: 15px;
+            text-decoration: none;
+            display: block;
+        }
+    }
+}

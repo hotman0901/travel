@@ -1,0 +1,56 @@
+@mixin icomoon-font($ff){
+  @content;
+  font-family: $ff, Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"微軟正黑體", "Microsoft JhengHei";
+}
+@mixin range-width($min: 0, $max: 0){
+  @if $max == 0 {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: $max - 1px) and (min-width: $min) {
+      @content;
+    }
+  }
+}
+@mixin range-height($min: 0, $max: 0){
+  @if $max == 0 {
+    @media screen and (min-height: $min) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-height: $max - 1px) and (min-height: $min) {
+      @content;
+    }
+  }
+}
+
+@mixin desktop-top {
+    @media screen and (max-width: 1024px) {
+        @content
+    }
+}
+
+@mixin pad {
+    @media screen and (max-width: 768px) {
+        @content
+    }
+}
+
+@mixin iphone6 {
+    @media screen and (max-width: 568px) {
+        @content
+    }
+}
+
+@mixin mobile {
+    @media only screen and (max-width: 480px) {
+        @content
+    }
+}
+
+@mixin iphone {
+    @media screen and (max-width: 320px) {
+        @content
+    }
+}

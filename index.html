@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="旅遊網">
+    <meta name="keyword" content="旅遊網">
+    <meta http-equiv="X-UA-Compatiable" content="IE-Edge">
+    <!-- facebook設定-->
+    <meta property="og:title" content="旅遊網">
+    <meta property="og:description" content="旅遊網">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://data.kcg.gov.tw/">
+    <meta property="og:image" content="img/Hero.png">
+    <title>高雄旅遊網</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+     <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <!--[if lt IE 9]>
+            <script src="js/html5shiv.js"></script>
+            <script src="js/respond.min.js"></script>
+        <![endif]-->
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <section class="header">
+        <div class="jumbotron">
+            <div class="container">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                    <h1 class="travrel-title text-center animated rubberBand">高雄旅遊資訊</h1>
+                    <div class="form-group">
+                        <select class="form-control" id="select-area" style="">
+                            <option value="">--請選擇行政區域--</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 hot-area">
+                <!-- 多增一個div之後要調整就調整這個 -->
+                <div class="hot-area-item">
+                    <h2>熱門行政區</h2>
+                    <ul id="hot-area-list">
+                        <li class="">
+                            <a href="#" class="label label-info label-area-1">苓雅區</a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="label label-info label-area-2">三民區</a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="label label-info label-area-3">新興區</a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="label label-info label-area-4">鹽埕區</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                <hr class="hr-dashed">
+                <div class="icon-down2"></div>
+                <hr class="hr-dashed">
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <!-- 當有change觸發就要替換掉 -->
+                <h2 class="content-title"></h2>
+            </div>
+            <div class="row" id="render-content">
+            </div>
+            <div class="col-xs-12 col-sm-12 data-page text-center" id="render-page" style="display: none">
+                <!--  <a href="#" data-page="prev">
+                    < prev</a> &nbsp;
+                        <a href="#" data-page="1">1</a>
+                        <a href="#" data-page="2">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a> &nbsp;
+                        <a href="#" data-page="next">next ></a> -->
+            </div>
+        </div>
+    </section>
+    <section class="fotter" style="display: none">
+        <div class="container-fluid">
+            <h3 class="text-center">高雄旅遊網</h3>
+            <a href="http://data.kcg.gov.tw/" target="_blank" class="text-center">資料來源：高雄市政府</a>
+        </div>
+    </section>
+    <!-- gototp -->
+    <div class="gototp" style="display: none">
+        <a href="#">
+            <img src="img/btn_goTop.png" class="gototp-img">
+        </a>
+    </div>
+    <script src="js/jquery1.11.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/all.js"></script>
+
+</html>
